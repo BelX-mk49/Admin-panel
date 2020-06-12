@@ -22,13 +22,13 @@ public class RegistrationController {
         this.userService = userService;
     }
 
-    @GetMapping("/registration")
+    @GetMapping("registration")
     public String registration(Model model) {
         model.addAttribute("message", "");
         return ("/registration");
     }
 
-    @PostMapping("/registration")
+    @PostMapping("registration")
     public String addUser(
             @RequestParam("password2") String passwordConfirm,
             @Valid User user,

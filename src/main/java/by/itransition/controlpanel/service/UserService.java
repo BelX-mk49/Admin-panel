@@ -26,7 +26,6 @@ public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
@@ -39,7 +38,7 @@ public class UserService implements UserDetailsService {
             throw new LockedException("User not found");
         }
         if (!user.isActive()) {
-            throw new LockedException("email not activated");
+            throw new LockedException("user is not activated");
         }
         return user;
     }
@@ -80,8 +79,8 @@ public class UserService implements UserDetailsService {
         return userRepository.findByUsername(user.getUsername()) != null;
     }
 
-    public boolean activateUser(String code) {
-        User user = null; // TODO
+    public boolean activateUser(boolean active) {
+        User user = userRepository.findByActive(active);
 
         if (user != null) {
             user.setActive(true);

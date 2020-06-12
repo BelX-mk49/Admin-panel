@@ -1,4 +1,5 @@
 <#import "login.ftlh" as l>
+<#include "security.ftlh">
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="/">Learning management system</a>
@@ -10,34 +11,9 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="/main">Home</a>
+                <a class="nav-link" href="/">User list</a>
             </li>
-            <#if isUser>
-                <li class="nav-item">
-                    <a class="nav-link" href="/main">Home work</a>
-                </li>
-            </#if>
-            <#if isAdmin>
-                <li class="nav-item">
-                    <a class="nav-link" href="/user">User list</a>
-                </li>
-            </#if>
-            <#if isTeacher>
-                <li class="nav-item">
-                    <a class="nav-link" href="/teacherRoom">Teacher room</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="/groupManagement">Group management</a>
-                </li>
-            </#if>
-            <#if user??&&name!="unknown">
-                <li class="nav-item">
-                    <a class="nav-link" href="/user/profile">Profile</a>
-                </li>
-            </#if>
         </ul>
-
         <div class="navbar-text mr-3"><#if user??>${name}<#else>Please, login</#if></div>
         <@l.logout />
     </div>
