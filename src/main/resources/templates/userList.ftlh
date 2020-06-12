@@ -1,4 +1,5 @@
 <#import "parts/common.ftlh" as c>
+<#include "parts/security.ftlh">
 
 <@c.page>
     <#if user??>
@@ -21,7 +22,7 @@
             </tbody>
         </table>
     <#else>
-        Please authorise
+        Please log in
     </#if>
 
 </@c.page>

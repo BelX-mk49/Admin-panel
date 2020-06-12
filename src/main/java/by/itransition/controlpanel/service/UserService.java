@@ -65,10 +65,10 @@ public class UserService implements UserDetailsService {
         }
     }
 
-    public boolean deleteUser(Long userId) {
+    public boolean banUser(Long userId) {
         User user = userRepository.findByUserId(userId).orElseThrow();
         if (validationUser(user)) {
-            userRepository.delete(user);
+            user.setActive(false);
             return TRUE;
         }else {
             return FALSE;

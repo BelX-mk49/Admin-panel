@@ -1,21 +1,19 @@
 <#import "parts/common.ftlh" as c>
+<#include "parts/security.ftlh">
 
 <@c.page>
-    User editor
-    <form action="/user" method="post">
-        <label>
-            <input type="text" name="username" value="${user.username}">
-        </label>
-        <input type="hidden" value="${user.userId}" name="userId">
-        <input type="hidden" value="${_csrf.token}" name="_csrf">
-        <button type="submit">Save</button>
-    </form>
-    <form action="/user/delete" method="post">
-        <label>
-            <input type="text" name="username" value="${user.username}">
-        </label>
-        <input type="hidden" value="${user.userId}" name="userId">
-        <input type="hidden" value="${_csrf.token}" name="_csrf">
-        <button type="submit">Delete ${user.username}</button>
-    </form>
+    <#if user??>
+        User editor
+        <form action="/user/delete" method="post">
+            <label class="col-sm-2 col-form-label">
+                <input type="text" readonly class="form-control-plaintext" name="username" value="${user.username}">
+            </label>
+            <input type="hidden" value="${user.userId}" name="userId">
+            <input type="hidden" value="${_csrf.token}" name="_csrf">
+            <button class="btn btn-danger" type="submit">Delete ${user.username}</button>
+        </form>
+        <#else>
+        You are not login
+    </#if>
+
 </@c.page>
