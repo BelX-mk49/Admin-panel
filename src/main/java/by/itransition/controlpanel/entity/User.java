@@ -1,5 +1,6 @@
 package by.itransition.controlpanel.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.security.core.GrantedAuthority;
@@ -35,6 +36,12 @@ public class User implements UserDetails {
     @Email(message = "Email isn't correct")
     @NotBlank(message = "Email can't be empty")
     private String email;
+
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    private String registrationDate;
+
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    private String lastLoginDate;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

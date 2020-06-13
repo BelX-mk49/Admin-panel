@@ -5,7 +5,7 @@ create table usr
     password varchar(255) not null,
     active   boolean,
     email    varchar(255) not null,
+    registration_date    varchar(255) not null,
+    last_login_date    varchar(255) not null,
     primary key (user_id)
 );
-insert into usr(user_id, username, password, active, email)
-values (1, 'admin', '$2y$08$3F4NZRyuhlwH3uQ8GLecp.e0zhdzpe//PjbGdQCOzxPJnFyMSTwlO', true, 'example@mail.ru');

@@ -34,14 +34,8 @@ public class UserController {
         return "userEdit";
     }
 
-    @PostMapping
-    public String userSave(@RequestParam String username, @RequestParam Map<String, String> form, @RequestParam("userId") User user) {
-        userService.saveUser(user, username, form);
-        return "redirect:/user";
-    }
-
     @PostMapping("delete")
-    public String userDelete(IdDto idDto) {
+    public String banUser(IdDto idDto) {
         userService.banUser(idDto.getUserId());
         return "redirect:/login?logout";
     }

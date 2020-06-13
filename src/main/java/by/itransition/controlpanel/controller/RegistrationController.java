@@ -35,9 +35,6 @@ public class RegistrationController {
             BindingResult bindingResult,
             Model model
     ) {
-        if (userService.isConfirmEmpty(passwordConfirm)){
-            model.addAttribute("password2Error", "Password confirmation can't be empty");
-        }
 
         if (userService.isPasswordDifferent(passwordConfirm, user)){
             bindingResult.addError(new FieldError("user", "password", "Password are different"));
@@ -47,9 +44,8 @@ public class RegistrationController {
 
         if (userService.isConfirmEmpty(passwordConfirm) || bindingResult.hasErrors()) {
             Map<String, String> errors = ControllerUtils.getErrors(bindingResult);
-
+            model.addAttribute("password2Error", "Password confirmation can't be empty");
             model.mergeAttributes(errors);
-
             return "registration";
         }
 

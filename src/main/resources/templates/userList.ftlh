@@ -3,23 +3,28 @@
 
 <@c.page>
     <#if user??>
-        List of users
-        <table>
-            <thead>
-            <tr>
-                <th>Name</th>
-                <th>Role</th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
+        <table class="table">
             <#list users as user>
+                <thead>
                 <tr>
-                    <td>${user.username}</td>
-                    <td><a href="/user/${user.userId}">edit</a></td>
+                    <th scope="col">Id</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Registration date</th>
+                    <th scope="col">Last login date</th>
                 </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">${user.userId}</th>
+                    <td>${user.username}</td>
+                    <td>${user.email}</td>
+                    <td>${user.registrationDate}</td>
+                    <td>${user.lastLoginDate}</td>
+                    <td><a class="btn btn-danger" href="/user/${user.userId}">Ban</a></td>
+                </tr>
+                </tbody>
             </#list>
-            </tbody>
         </table>
     <#else>
         Please log in
