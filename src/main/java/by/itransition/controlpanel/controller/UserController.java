@@ -3,6 +3,7 @@ package by.itransition.controlpanel.controller;
 import by.itransition.controlpanel.entity.User;
 import by.itransition.controlpanel.dto.IdDto;
 import by.itransition.controlpanel.service.UserService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,15 +29,23 @@ public class UserController {
         return "userList";
     }
 
-    @GetMapping("{user}")
-    public String userEditForm(@PathVariable User user, Model model){
-        model.addAttribute("user", user);
-        return "userEdit";
+    @PostMapping("block")
+    public String banUser(IdDto idDto) {
+        userService.block(idDto.getUserId());
+        return "redirect:/login?logout";
     }
 
     @PostMapping("delete")
-    public String banUser(IdDto idDto) {
-        userService.banUser(idDto.getUserId());
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public String delete(IdDto idDto) {
+        userService.delete(idDto.getUserId());
+        return "redirect:/login?logout";
+    }
+
+    @PostMapping("unblock")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public String unblock(IdDto idDto) {
+        userService.unblock(idDto.getUserId());
         return "redirect:/login?logout";
     }
 }

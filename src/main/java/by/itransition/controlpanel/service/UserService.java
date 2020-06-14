@@ -63,10 +63,24 @@ public class UserService implements UserDetailsService {
         }
     }
 
-    public void banUser(Long userId) {
+    public void block(Long userId) {
         User user = userRepository.findByUserId(userId).orElseThrow();
         if (validationUser(user)) {
             user.setActive(false);
+        }
+    }
+
+    public void unblock(Long userId) {
+        User user = userRepository.findByUserId(userId).orElseThrow();
+        if (validationUser(user)) {
+            user.setActive(true);
+        }
+    }
+
+    public void delete(Long userId) {
+        User user = userRepository.findByUserId(userId).orElseThrow();
+        if (validationUser(user)) {
+            userRepository.delete(user);
         }
     }
 

@@ -25,6 +25,6 @@ public class CustomAuthenticationSuccessHandler extends SavedRequestAwareAuthent
                                         Authentication authentication) throws ServletException, IOException {
         Calendar date = Calendar.getInstance();
         DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
-        userService.updateLoginDate(df.format(date.getTime()), authentication.getCredentials().toString());
+        userService.updateLoginDate(df.format(date.getTime()), authentication.getPrincipal().toString());
     }
 }

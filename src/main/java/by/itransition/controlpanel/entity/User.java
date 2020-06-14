@@ -33,6 +33,10 @@ public class User implements UserDetails {
     private String password;
     private boolean active;
 
+    public String getStatus() {
+        return String.valueOf(this.active);
+    }
+
     @Email(message = "Email isn't correct")
     @NotBlank(message = "Email can't be empty")
     private String email;
