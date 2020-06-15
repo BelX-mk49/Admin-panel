@@ -8,7 +8,7 @@
             <thead>
             <tr>
                 <th>
-                    <input type="checkbox" onclick="toggle(this)">Select/unselect all<br/>
+                    <input id="checkbox" type="checkbox" onclick="toggle(this)">Select/unselect all<br/>
                 </th>
                 <th scope="col">Id</th>
                 <th scope="col">Username</th>
@@ -20,15 +20,18 @@
             </thead>
             <div class="btn-group" role="group" aria-label="Toolbar">
                 <form action="/user/edit" method="post">
-                    <button id="btn" name="action" value="block" type="submit" class="btn btn-secondary">Block</button>
-                    <button id="btn" name="action" value="unblock" type="submit" class="btn btn-primary">Unblock</button>
-                    <button id="btn" name="action" value="delete" type="submit" class="btn btn-danger">Delete</button>
+                    <button id="btn1" disabled="disabled" name="action"
+                            value="block" type="submit" class="btn btn-secondary">Block</button>
+                    <button id="btn2" disabled="disabled" name="action"
+                            value="unblock" type="submit" class="btn btn-primary">Unblock</button>
+                    <button id="btn3" disabled="disabled" name="action"
+                            value="delete" type="submit" class="btn btn-danger">Delete</button>
                     <#list users as user>
                         <tbody>
                         <tr>
                             <th>
                                 <input type="hidden" value="${_csrf.token}" name="_csrf">
-                                <label><input name="userId" value="${user.userId}" type="checkbox"></label>
+                                <label><input id="checkbox" name="userId" value="${user.userId}" type="checkbox"></label>
                             </th>
                             <td>${user.userId}</td>
                             <td>${user.username}</td>
@@ -51,15 +54,19 @@
                 }
             }
         </script>
-            <script>
-                $('#checkbox').on('change', function () {
-                    if ( $('#checkbox').prop('checked') ) {
-                        $('#btn').attr('disabled', false);
-                    } else {
-                        $('#btn').attr('disabled', true);
-                    }
-                });
-            </script>
+        <script>
+            $('input:checkbox').click(function(){
+                if ($(this).is(':checked')){
+                    $('#btn1').removeAttr('disabled');
+                    $('#btn2').removeAttr('disabled');
+                    $('#btn3').removeAttr('disabled');
+                } else {
+                    $('#btn1').attr('disabled', 'disabled');
+                    $('#btn2').attr('disabled', 'disabled');
+                    $('#btn3').attr('disabled', 'disabled');
+                }
+            });
+        </script>
     <#else>
         Please log in
     </#if>

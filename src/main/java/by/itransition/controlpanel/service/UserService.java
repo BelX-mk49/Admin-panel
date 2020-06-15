@@ -25,7 +25,6 @@ import static java.lang.Boolean.TRUE;
 @Service
 @Transactional
 public class UserService implements UserDetailsService {
-
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
@@ -65,28 +64,49 @@ public class UserService implements UserDetailsService {
         }
     }
 
-    public void block(String[] userId) {
-        action(userId).setActive(false);
-    }
-
-    public void unblock(String[] userId) {
-        action(userId).setActive(true);
-    }
-
-    public void delete(String[] userId) {
-        userRepository.delete(action(userId));
-    }
-
-    private User action(String[] userId) {
-        List<Long> list = Arrays.stream(userId).map(Long::valueOf).collect(Collectors.toList());
-        User user = null;
-        for (Long id : list){
-            user = userRepository.findByUserId(id).orElseThrow();
-            if (validationUser(user)) {
-                return user;
+    public String block(String[] userId, User currentUser) {
+        String redirect = "redirect:/";
+        for (Long id : arrayToList(userId)){
+            if (getCurrentUserId(currentUser).equals(id)) {
+                redirect = "redirect:/login?logout";
             }
+            getUser(id).setActive(false);
         }
-        return user;
+        return redirect;
+    }
+
+    public String unblock(String[] userId, User currentUser) {
+        String redirect = "redirect:/";
+        for (Long id : arrayToList(userId)){
+            if (getCurrentUserId(currentUser).equals(id)) {
+                redirect = "redirect:/login?logout";
+            }
+            getUser(id).setActive(true);
+        }
+        return redirect;
+    }
+
+    private User getUser(Long id) {
+        return userRepository.findByUserId(id).orElseThrow();
+    }
+
+    public String delete(String[] userId, User currentUser) {
+        String redirect = "redirect:/";
+        for (Long id : arrayToList(userId)){
+            if (getCurrentUserId(currentUser).equals(id)) {
+                redirect = "redirect:/login?logout";
+            }
+            userRepository.delete(getUser(id));
+        }
+        return redirect;
+    }
+
+    private Long getCurrentUserId(User currentUser) {
+        return currentUser.getUserId();
+    }
+
+    private List<Long> arrayToList(String[] userId) {
+        return Arrays.stream(userId).map(Long::valueOf).collect(Collectors.toList());
     }
 
     private boolean validationUser(User user) {

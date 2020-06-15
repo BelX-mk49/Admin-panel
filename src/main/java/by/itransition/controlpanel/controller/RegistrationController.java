@@ -35,25 +35,21 @@ public class RegistrationController {
             BindingResult bindingResult,
             Model model
     ) {
-
         if (userService.isPasswordDifferent(passwordConfirm, user)){
             bindingResult.addError(new FieldError("user", "password", "Password are different"));
             model.addAttribute("passwordError", "Password are different");
             return "registration";
         }
-
         if (userService.isConfirmEmpty(passwordConfirm) || bindingResult.hasErrors()) {
             Map<String, String> errors = ControllerUtils.getErrors(bindingResult);
             model.addAttribute("password2Error", "Password confirmation can't be empty");
             model.mergeAttributes(errors);
             return "registration";
         }
-
         if (!userService.addUser(user)) {
             model.addAttribute("usernameError", "User exists!");
             return "registration";
         }
         return "redirect:/login";
     }
-
 }
