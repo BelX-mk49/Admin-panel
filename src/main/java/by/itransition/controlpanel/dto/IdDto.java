@@ -2,7 +2,9 @@ package by.itransition.controlpanel.dto;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class IdDto {
-    private Long userId;
+    private List<Long> userId;
 }

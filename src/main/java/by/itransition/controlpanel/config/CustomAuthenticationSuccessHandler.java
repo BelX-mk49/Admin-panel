@@ -1,5 +1,6 @@
 package by.itransition.controlpanel.config;
 
+import by.itransition.controlpanel.repository.UserRepository;
 import by.itransition.controlpanel.service.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
@@ -13,18 +14,17 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class CustomAuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
-    private final UserService userService;
 
-    public CustomAuthenticationSuccessHandler(UserService userService) {
-        this.userService = userService;
+    private final UserRepository userRepository;
+
+    public CustomAuthenticationSuccessHandler( UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest request,
-                                        HttpServletResponse response,
-                                        Authentication authentication) throws ServletException, IOException {
+    public void onAuthenticationSuccess(HttpServletRequest req, HttpServletResponse res, Authentication auth){
         Calendar date = Calendar.getInstance();
         DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
-        userService.updateLoginDate(df.format(date.getTime()), authentication.getPrincipal().toString());
+        userRepository.findByUsername(auth.getName()).setLastLoginDate(df.format(date.getTime()));
     }
 }

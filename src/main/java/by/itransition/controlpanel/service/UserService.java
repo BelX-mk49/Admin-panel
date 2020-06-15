@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
@@ -63,29 +65,28 @@ public class UserService implements UserDetailsService {
         }
     }
 
-    public void block(Long userId) {
-        User user = userRepository.findByUserId(userId).orElseThrow();
-        if (validationUser(user)) {
-            user.setActive(false);
-        }
+    public void block(String[] userId) {
+        action(userId).setActive(false);
     }
 
-    public void unblock(Long userId) {
-        User user = userRepository.findByUserId(userId).orElseThrow();
-        if (validationUser(user)) {
-            user.setActive(true);
-        }
+    public void unblock(String[] userId) {
+        action(userId).setActive(true);
     }
 
-    public void delete(Long userId) {
-        User user = userRepository.findByUserId(userId).orElseThrow();
-        if (validationUser(user)) {
-            userRepository.delete(user);
-        }
+    public void delete(String[] userId) {
+        userRepository.delete(action(userId));
     }
 
-    public void updateLoginDate(String date, String username) {
-        userRepository.findByUsername(username).setLastLoginDate(date);
+    private User action(String[] userId) {
+        List<Long> list = Arrays.stream(userId).map(Long::valueOf).collect(Collectors.toList());
+        User user = null;
+        for (Long id : list){
+            user = userRepository.findByUserId(id).orElseThrow();
+            if (validationUser(user)) {
+                return user;
+            }
+        }
+        return user;
     }
 
     private boolean validationUser(User user) {

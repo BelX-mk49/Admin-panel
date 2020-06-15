@@ -1,5 +1,6 @@
 package by.itransition.controlpanel.config;
 
+import by.itransition.controlpanel.repository.UserRepository;
 import by.itransition.controlpanel.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -21,6 +22,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private UserService userService;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Bean
@@ -30,7 +34,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public AuthenticationSuccessHandler myAuthenticationSuccessHandler() {
-        return new CustomAuthenticationSuccessHandler(userService);
+        return new CustomAuthenticationSuccessHandler(userRepository);
     }
 
     @Override
@@ -46,7 +50,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .successHandler(myAuthenticationSuccessHandler())
                 .and()
                     .logout()
-                    .permitAll();
+                    .permitAll()
+                .and()
+                    .formLogin().defaultSuccessUrl("/");
     }
 
     @Override
