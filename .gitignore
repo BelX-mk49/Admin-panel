@@ -24,3 +24,5 @@ hs_err_pid*
 /.idea/
 /target/
 /Control-panel.iml
+/control-panel.pub
+/control-panel
