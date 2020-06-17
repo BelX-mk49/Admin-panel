@@ -1,6 +1,6 @@
 create table usr
 (
-    user_id  int8        not null,
+    user_id  serial        not null,
     username varchar(255) not null,
     password varchar(255) not null,
     active   boolean,
