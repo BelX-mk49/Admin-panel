@@ -27,9 +27,9 @@ public class UserController {
     }
 
     @PostMapping(value = "/edit")
-    public String block(@RequestParam("userId") String[] userId,
-                        @RequestParam(value = "action") String action,
-                        @AuthenticationPrincipal User currentUser) {
+    public String action(@RequestParam("userId") String[] userId,
+                         @RequestParam(value = "action") String action,
+                         @AuthenticationPrincipal User currentUser) {
         String redirect = "";
         if (action.equals("block")){
             redirect = userService.block(userId, currentUser);
@@ -39,7 +39,7 @@ public class UserController {
         return redirect;
     }
 
-    @DeleteMapping(value = "/edit", params = "action=delete")
+    @PostMapping(value = "/edit", params = "action=delete")
     public String delete(@RequestParam("userId") String[] userId, @AuthenticationPrincipal User currentUser) {
         String redirect = "";
         redirect = userService.delete(userId, currentUser);

@@ -3,7 +3,6 @@
 
 <@c.page>
     <#if user??>
-
         <table class="table">
             <thead>
             <tr>
@@ -70,5 +69,4 @@
     <#else>
         Please log in
     </#if>
-
 </@c.page>
