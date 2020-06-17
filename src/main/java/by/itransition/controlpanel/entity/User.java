@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -22,6 +24,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = IDENTITY)
+    @Column(columnDefinition = "serial")
     private Long userId;
 
     @NotBlank(message = "Username can't be empty")
