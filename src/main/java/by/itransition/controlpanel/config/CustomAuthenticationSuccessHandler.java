@@ -1,18 +1,22 @@
 package by.itransition.controlpanel.config;
 
+import by.itransition.controlpanel.entity.User;
 import by.itransition.controlpanel.repository.UserRepository;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.DefaultRedirectStrategy;
+import org.springframework.security.web.RedirectStrategy;
+import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 @Component
-public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
+public class CustomAuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
 
     private final UserRepository userRepository;
 
@@ -20,10 +24,16 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         this.userRepository = userRepository;
     }
 
+    private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
+
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest req, HttpServletResponse res, Authentication auth){
+    public void onAuthenticationSuccess(HttpServletRequest req, HttpServletResponse res, Authentication auth) throws IOException {
+        clearAuthenticationAttributes(req);
+        redirectStrategy.sendRedirect(req, res, "/");
         Calendar date = Calendar.getInstance();
         DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
-        userRepository.findByUsername(auth.getName()).setLastLoginDate(df.format(date.getTime()));
+        User user = userRepository.findByUsername(auth.getName());
+        user.setLastLoginDate(df.format(date.getTime()));
+        userRepository.save(user);
     }
 }

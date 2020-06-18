@@ -7,7 +7,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -78,7 +77,7 @@ public class UserService implements UserDetailsService {
     public String unblock(String[] userId, User currentUser, String redirect) {
         for (Long id : arrayToList(userId)){
             if (getCurrentUserId(currentUser).equals(id)) {
-                redirect = "redirect:/login?logout";
+                redirect = "redirect:/";
             }
             getUser(id).setActive(true);
         }

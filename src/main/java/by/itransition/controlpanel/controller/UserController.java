@@ -40,12 +40,11 @@ public class UserController {
         String redirect = "redirect:/";
         if (action.equals("block")){
             redirect = userService.block(userId, currentUser, redirect);
-        }else {
+            if (redirect.equals("redirect:/login?logout")) {
+                logoutPage(request, response);
+            }
+        }else
             redirect = userService.unblock(userId, currentUser, redirect);
-        }
-        if (redirect.equals("redirect:/login?logout")) {
-            logoutPage(request, response);
-        }
         return redirect;
     }
 

@@ -44,9 +44,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .successHandler(myAuthenticationSuccessHandler())
                 .and()
                     .logout()
-                    .permitAll()
-                .and()
-                    .formLogin().defaultSuccessUrl("/");
+                    .permitAll();
     }
 
     @Override
