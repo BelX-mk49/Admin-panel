@@ -4,7 +4,6 @@
     <h5>Hello,
         <#if user??>${user.username}<#else>guest</#if></h5>
     <div>This is a simple user management system</div>
-
     <#if user??>
         User editor
         <form action="/user" method="post">
@@ -26,6 +25,5 @@
     <#else>
         Please authorise
     </#if>
-
 </@c.page>
 

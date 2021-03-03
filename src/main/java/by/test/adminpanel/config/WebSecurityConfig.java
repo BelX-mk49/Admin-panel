@@ -17,9 +17,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserService userService;
-
     private final UserRepository userRepository;
-
     private final PasswordEncoder passwordEncoder;
 
     public WebSecurityConfig(UserService userService, UserRepository userRepository, PasswordEncoder passwordEncoder) {

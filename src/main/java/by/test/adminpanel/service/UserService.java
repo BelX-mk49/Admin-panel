@@ -98,7 +98,6 @@ public class UserService implements UserDetailsService {
         return redirect;
     }
 
-
     private Long getCurrentUserId(User currentUser) {
         return currentUser.getUserId();
     }
