@@ -7,7 +7,7 @@
             <thead>
             <tr>
                 <th>
-                    <input id="checkbox" type="checkbox" onclick="toggle(this)">Select/unselect all<br/>
+                    <label for="checkbox"></label><input id="checkbox" type="checkbox" onclick="toggle(this)">Select/unselect all<br/>
                 </th>
                 <th scope="col">Id</th>
                 <th scope="col">Username</th>

@@ -2,7 +2,6 @@ package by.itransition.controlpanel.config;
 
 import by.itransition.controlpanel.repository.UserRepository;
 import by.itransition.controlpanel.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -17,14 +16,17 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
+
+    public WebSecurityConfig(UserService userService, UserRepository userRepository, PasswordEncoder passwordEncoder) {
+        this.userService = userService;
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @Bean
     public AuthenticationSuccessHandler myAuthenticationSuccessHandler() {

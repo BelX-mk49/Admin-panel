@@ -24,7 +24,7 @@ public class CustomAuthenticationSuccessHandler extends SavedRequestAwareAuthent
         this.userRepository = userRepository;
     }
 
-    private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
+    private final RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest req, HttpServletResponse res, Authentication auth) throws IOException {
