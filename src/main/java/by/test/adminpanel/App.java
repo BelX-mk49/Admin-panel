@@ -1,4 +1,4 @@
-package by.itransition.controlpanel;
+package by.test.adminpanel;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,7 +1,7 @@
-package by.itransition.controlpanel.config;
+package by.test.adminpanel.config;
 
-import by.itransition.controlpanel.repository.UserRepository;
-import by.itransition.controlpanel.service.UserService;
+import by.test.adminpanel.repository.UserRepository;
+import by.test.adminpanel.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;

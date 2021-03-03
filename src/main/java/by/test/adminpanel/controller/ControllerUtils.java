@@ -1,4 +1,4 @@
-package by.itransition.controlpanel.controller;
+package by.test.adminpanel.controller;
 
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;

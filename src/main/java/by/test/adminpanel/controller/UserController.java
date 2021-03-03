@@ -1,7 +1,7 @@
-package by.itransition.controlpanel.controller;
+package by.test.adminpanel.controller;
 
-import by.itransition.controlpanel.entity.User;
-import by.itransition.controlpanel.service.UserService;
+import by.test.adminpanel.entity.User;
+import by.test.adminpanel.service.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;

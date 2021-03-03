@@ -1,7 +1,7 @@
-package by.itransition.controlpanel.config;
+package by.test.adminpanel.config;
 
-import by.itransition.controlpanel.entity.User;
-import by.itransition.controlpanel.repository.UserRepository;
+import by.test.adminpanel.entity.User;
+import by.test.adminpanel.repository.UserRepository;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;

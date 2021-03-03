@@ -1,4 +1,4 @@
-package by.itransition.controlpanel.config;
+package by.test.adminpanel.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

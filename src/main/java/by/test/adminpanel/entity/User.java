@@ -1,4 +1,4 @@
-package by.itransition.controlpanel.entity;
+package by.test.adminpanel.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;

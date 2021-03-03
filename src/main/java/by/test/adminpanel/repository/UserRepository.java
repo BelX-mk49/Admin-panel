@@ -1,6 +1,6 @@
-package by.itransition.controlpanel.repository;
+package by.test.adminpanel.repository;
 
-import by.itransition.controlpanel.entity.User;
+import by.test.adminpanel.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

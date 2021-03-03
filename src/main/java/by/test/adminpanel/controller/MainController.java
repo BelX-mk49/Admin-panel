@@ -1,6 +1,6 @@
-package by.itransition.controlpanel.controller;
+package by.test.adminpanel.controller;
 
-import by.itransition.controlpanel.service.UserService;
+import by.test.adminpanel.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,7 +1,7 @@
-package by.itransition.controlpanel.service;
+package by.test.adminpanel.service;
 
-import by.itransition.controlpanel.entity.User;
-import by.itransition.controlpanel.repository.UserRepository;
+import by.test.adminpanel.entity.User;
+import by.test.adminpanel.repository.UserRepository;
 import org.springframework.security.authentication.LockedException;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
